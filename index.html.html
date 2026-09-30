@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personality | C1 English</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --card:#fff; --ink:#172033; --muted:#647084;
+    --accent:#4f46e5; --accent2:#7c3aed; --ok:#16835b; --bad:#c43d52;
+    --line:#dfe4ec; --soft:#eef0ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+       background:linear-gradient(135deg,#f6f8ff,#f9f6ff);color:var(--ink);line-height:1.6}
+  .wrap{max-width:1050px;margin:auto;padding:28px 20px 60px}
+  header{background:linear-gradient(135deg,#312e81,#6d28d9);color:white;border-radius:24px;padding:38px 36px;margin-bottom:22px;box-shadow:0 16px 40px #312e8125}
+  h1{font-size:clamp(2.2rem,5vw,3.7rem);margin:0 0 8px;letter-spacing:-.04em}
+  header p{margin:6px 0 0;max-width:760px;color:#ede9fe;font-size:1.06rem}
+  .badge{display:inline-block;background:#ffffff22;border:1px solid #ffffff44;padding:5px 11px;border-radius:999px;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+  .progress{margin-top:20px;background:#ffffff25;border-radius:999px;height:10px;overflow:hidden}
+  .bar{height:100%;width:0;background:#fff;border-radius:999px;transition:.35s}
+  .status{margin-top:8px;font-size:.9rem;color:#ddd6fe}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;margin:20px 0;box-shadow:0 8px 25px #1f29370b}
+  .kicker{font-size:.78rem;color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+  h2{margin:4px 0 10px;font-size:1.55rem}
+  .intro{color:var(--muted);margin-top:0}
+  .question{border-top:1px solid var(--line);padding:18px 0}
+  .question:first-of-type{border-top:0}
+  .qnum{font-weight:800;color:var(--accent)}
+  select,textarea,.open-input{width:100%;font:inherit;border:1px solid #cfd6e2;border-radius:12px;padding:11px 13px;background:white;color:var(--ink)}
+  select{max-width:460px;margin-top:8px}
+  .open-input{display:inline-block;width:min(330px,100%);margin:0 4px;padding:7px 10px}
+  textarea{min-height:120px;resize:vertical;margin-top:8px}
+  button{border:0;border-radius:12px;background:var(--accent);color:white;font-weight:750;padding:11px 17px;cursor:pointer;margin-top:10px}
+  button:hover{background:#4338ca}
+  button.secondary{background:#eef0ff;color:#3730a3}
+  .feedback{margin-top:10px;font-weight:650;min-height:24px}
+  .correct{color:var(--ok)} .incorrect{color:var(--bad)}
+  .hint{background:#fafaff;border-left:4px solid #a5b4fc;padding:10px 13px;margin-top:10px;border-radius:0 10px 10px 0;color:#4b5563}
+  .model{display:none;background:#ecfdf5;border:1px solid #a7f3d0;padding:13px 15px;border-radius:12px;margin-top:10px}
+  .model strong{color:#065f46}
+  .score{font-size:1.15rem;font-weight:800}
+  footer{text-align:center;color:var(--muted);font-size:.9rem;margin-top:28px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 4px}
+  .chip{background:#f1f5f9;border-radius:999px;padding:4px 9px;font-size:.82rem}
+  @media(max-width:600px){header,.card{padding:22px}.wrap{padding:18px 12px 45px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="badge">C1 · European Framework</span>
+  <h1>Personality</h1>
+  <p>Explore personality vocabulary in context. Choose precisely, then use the language actively in challenging open-response tasks.</p>
+  <div class="progress"><div class="bar" id="bar"></div></div>
+  <div class="status" id="status">0 of 4 activities completed</div>
+</header>
+
+<section class="card">
+  <div class="kicker">Vocabulary focus</div>
+  <h2>Personality adjectives</h2>
+  <p class="intro">Read each situation carefully. Select the adjective that best fits the context.</p>
+  <div class="chips">
+    <span class="chip">bright</span><span class="chip">conscientious</span><span class="chip">determined</span>
+    <span class="chip">gentle</span><span class="chip">resourceful</span><span class="chip">sarcastic</span>
+    <span class="chip">self-sufficient</span><span class="chip">spontaneous</span><span class="chip">steady</span>
+    <span class="chip">straightforward</span><span class="chip">sympathetic</span><span class="chip">thorough</span>
+  </div>
+</section>
+
+<section class="card activity" id="a1">
+  <div class="kicker">Activity 1 · Multiple choice</div>
+  <h2>Choose the adjective</h2>
+  <p class="intro">There is one best answer for each situation.</p>
+
+  <div class="question"><span class="qnum">1.</span> Even when the project collapsed at the last minute, Maya calmly found three alternative solutions using the limited resources available. She is extremely
+    <select data-answer="resourceful"><option value="">Choose...</option><option>bright</option><option>resourceful</option><option>gentle</option><option>steady</option></select>
+  </div>
+  <div class="question"><span class="qnum">2.</span> Leo checks every figure, source and reference before submitting a report. Nothing is left unexplained or unchecked. He is
+    <select data-answer="thorough"><option value="">Choose...</option><option>spontaneous</option><option>thorough</option><option>sarcastic</option><option>sympathetic</option></select>
+  </div>
+  <div class="question"><span class="qnum">3.</span> Nadia refuses to abandon her application after two rejections. She asks for feedback, improves her portfolio and applies again. She is
+    <select data-answer="determined"><option value="">Choose...</option><option>self-sufficient</option><option>determined</option><option>gentle</option><option>bright</option></select>
+  </div>
+  <div class="question"><span class="qnum">4.</span> Tom prefers to solve problems alone and rarely needs other people to organise his daily life. He is highly
+    <select data-answer="self-sufficient"><option value="">Choose...</option><option>conscientious</option><option>self-sufficient</option><option>straightforward</option><option>spontaneous</option></select>
+  </div>
+  <div class="question"><span class="qnum">5.</span> When the team makes a mistake, Priya tells them exactly what went wrong without being rude or evasive. She is
+    <select data-answer="straightforward"><option value="">Choose...</option><option>straightforward</option><option>sarcastic</option><option>gentle</option><option>sympathetic</option></select>
+  </div>
+  <button type="button" id="check-a1">Check answers</button>
+  <div class="feedback" id="a1-feedback"></div>
+</section>
+
+<section class="card activity" id="a2">
+  <div class="kicker">Activity 2 · Complete the sentences</div>
+  <h2>Complete the sentence — no options</h2>
+  <p class="intro">Read the context and type the personality adjective that best completes each sentence. Do not use a word bank. Pay attention to meaning and grammar.</p>
+
+  <div class="question"><span class="qnum">1.</span> Emma always checks her assignments twice, meets every deadline and takes responsibility for mistakes. She is extremely <input class="open-input" data-answer="conscientious" placeholder="type the adjective"></input>.
+  </div>
+  <div class="question"><span class="qnum">2.</span> When the school trip was cancelled, Daniel immediately organised an alternative activity for everyone. He is remarkably <input class="open-input" data-answer="resourceful" placeholder="type the adjective"></input>.
+  </div>
+  <div class="question"><span class="qnum">3.</span> Although she failed her driving test twice, Sofia kept practising until she finally passed. She is incredibly <input class="open-input" data-answer="determined" placeholder="type the adjective"></input>.
+  </div>
+  <div class="question"><span class="qnum">4.</span> You can leave Jack to organise his own finances and daily routine; he rarely needs anyone's help. He is very <input class="open-input" data-answer="self-sufficient" placeholder="type the adjective"></input>.
+  </div>
+  <div class="question"><span class="qnum">5.</span> Rather than hinting at the problem, Laura told me exactly what she thought and explained her reasons clearly. She is very <input class="open-input" data-answer="straightforward" placeholder="type the adjective"></input>.
+  </div>
+  <button type="button" id="check-a2">Check answers</button>
+  <div class="feedback" id="a2-feedback"></div>
+</section>
+
+<section class="card">
+  <div class="kicker">Idiomatic language</div>
+  <h2>Personality idioms</h2>
+  <p class="intro">These expressions are often used to describe how someone behaves around other people.</p>
+  <div class="chips">
+    <span class="chip">a heart of gold</span><span class="chip">down to earth</span><span class="chip">a cold fish</span>
+    <span class="chip">a real pain in the neck</span><span class="chip">a soft touch</span><span class="chip">a very quick temper</span>
+    <span class="chip">full of yourself</span><span class="chip">wouldn’t hurt a fly</span><span class="chip">never lifts a finger</span>
+    <span class="chip">the life and soul of the party</span>
+  </div>
+</section>
+
+<section class="card activity" id="a3">
+  <div class="kicker">Activity 3 · Multiple choice</div>
+  <h2>Choose the idiom</h2>
+  <p class="intro">Choose the expression that best completes each context.</p>
+
+  <div class="question"><span class="qnum">1.</span> Everyone loves asking Ben for help. He regularly volunteers at the local shelter and always notices when someone is struggling. He has
+    <select data-answer="a heart of gold"><option value="">Choose...</option><option>a heart of gold</option><option>a very quick temper</option><option>a cold fish</option><option>never lifts a finger</option></select>
+  </div>
+  <div class="question"><span class="qnum">2.</span> Ella can talk to anyone, makes people laugh within minutes and is always dancing at social events. She's
+    <select data-answer="the life and soul of the party"><option value="">Choose...</option><option>full of yourself</option><option>the life and soul of the party</option><option>a soft touch</option><option>down to earth</option></select>
+  </div>
+  <div class="question"><span class="qnum">3.</span> Don't ask Sam to lend you money. He finds it almost impossible to say no when people ask for help, even when they take advantage of him. He's
+    <select data-answer="a soft touch"><option value="">Choose...</option><option>a soft touch</option><option>a cold fish</option><option>a real pain in the neck</option><option>down to earth</option></select>
+  </div>
+  <div class="question"><span class="qnum">4.</span> You can spend ten minutes talking to Chloe and still have no idea what she feels. She rarely shows emotion and seems distant.
+    <select data-answer="a cold fish"><option value="">Choose...</option><option>a heart of gold</option><option>a cold fish</option><option>wouldn't hurt a fly</option><option>full of yourself</option></select>
+  </div>
+  <div class="question"><span class="qnum">5.</span> Max gets angry over tiny inconveniences. If someone interrupts him or his phone stops working, he can explode immediately. He has
+    <select data-answer="a very quick temper"><option value="">Choose...</option><option>a very quick temper</option><option>a heart of gold</option><option>never lifts a finger</option><option>the life and soul of the party</option></select>
+  </div>
+  <button type="button" id="check-a3">Check answers</button>
+  <div class="feedback" id="a3-feedback"></div>
+</section>
+
+<section class="card activity" id="a4">
+  <div class="kicker">Activity 4 · Complete the sentences</div>
+  <h2>Complete the idiom — no options</h2>
+  <p class="intro">Complete each sentence with the personality idiom that fits the context. Write the full expression from memory. No options are provided.</p>
+
+  <div class="question"><span class="qnum">1.</span> Everyone trusts Olivia with personal problems because she is incredibly kind and generous. She has <input class="open-input" data-answer="a heart of gold" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">2.</span> Despite becoming a successful actor, he remains modest, practical and easy to talk to. He is very <input class="open-input" data-answer="down to earth" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">3.</span> Nina refuses to show any emotion and can seem distant even when people are trying to get to know her. She is a bit of <input class="open-input" data-answer="a cold fish" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">4.</span> Mark keeps interrupting meetings, complains about everything and makes everyone's job harder. He is <input class="open-input" data-answer="a real pain in the neck" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">5.</span> Don't ask Sophie to lend you money again. She finds it almost impossible to refuse people who ask for help. She's <input class="open-input" data-answer="a soft touch" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">6.</span> You never know when Tom will suddenly lose his temper over something trivial. He has <input class="open-input" data-answer="a very quick temper" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">7.</span> James talks constantly about how talented and successful he is, as though nobody else could possibly compare with him. He's <input class="open-input" data-answer="full of yourself" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">8.</span> Leo is so gentle and harmless that you could say he <input class="open-input" data-answer="wouldn't hurt a fly" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">9.</span> While the rest of the group is doing all the work, Ben sits back and contributes nothing. He <input class="open-input" data-answer="never lifts a finger" placeholder="type the full idiom"></input>.
+  </div>
+  <div class="question"><span class="qnum">10.</span> At every social event, Maya is the one telling stories, getting everyone dancing and keeping the atmosphere lively. She's <input class="open-input" data-answer="the life and soul of the party" placeholder="type the full idiom"></input>.
+  </div>
+  <button type="button" id="check-a4">Check answers</button>
+  <div class="feedback" id="a4-feedback"></div>
+</section>
+
+<section class="card">
+  <div class="score" id="finalScore">Complete the activities to track your progress.</div>
+  <button type="button" id="reset-all">Reset activities</button>
+</section>
+
+<footer>Personality · C1 English · Vocabulary in context</footer>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  const completed = new Set();
+
+  function normalise(value) {
+    return value.trim().toLowerCase()
+      .replace(/[.?!]+$/g, '')
+      .replace(/[’‘]/g, "'")
+      .replace(/\s+/g, ' ');
+  }
+
+  function checkSelect(id) {
+    const box = document.getElementById(id);
+    if (!box) return;
+
+    const selects = Array.from(box.querySelectorAll('select'));
+    let correct = 0;
+    let answered = 0;
+
+    selects.forEach(select => {
+      select.style.borderColor = '';
+      if (select.value) {
+        answered++;
+        if (normalise(select.value) === normalise(select.dataset.answer)) {
+          correct++;
+          select.style.borderColor = '#16835b';
+        } else {
+          select.style.borderColor = '#c43d52';
+        }
+      }
+    });
+
+    const feedback = document.getElementById(`${id}-feedback`);
+    if (!feedback) return;
+
+    if (answered < selects.length) {
+      completed.delete(id);
+      feedback.className = 'feedback incorrect';
+      feedback.textContent = `Please answer all ${selects.length} questions first.`;
+      updateProgress();
+      return;
+    }
+
+    const allCorrect = correct === selects.length;
+    feedback.className = `feedback ${allCorrect ? 'correct' : 'incorrect'}`;
+    feedback.textContent = allCorrect
+      ? `Excellent — ${correct}/${selects.length} correct.`
+      : `${correct}/${selects.length} correct. Review the highlighted answers and try again.`;
+
+    if (allCorrect) completed.add(id);
+    else completed.delete(id);
+
+    updateProgress();
+  }
+
+  function checkOpen(id) {
+    const box = document.getElementById(id);
+    if (!box) return;
+
+    const inputs = Array.from(box.querySelectorAll('.open-input'));
+    let correct = 0;
+    let answered = 0;
+
+    inputs.forEach(input => {
+      const value = normalise(input.value);
+      const answer = normalise(input.dataset.answer);
+      input.style.borderColor = '';
+
+      if (value) answered++;
+
+      if (value === answer) {
+        correct++;
+        input.style.borderColor = '#16835b';
+      } else if (value) {
+        input.style.borderColor = '#c43d52';
+      }
+    });
+
+    const feedback = document.getElementById(`${id}-feedback`);
+    if (!feedback) return;
+
+    if (answered < inputs.length) {
+      completed.delete(id);
+      feedback.className = 'feedback incorrect';
+      feedback.textContent = `Please complete all ${inputs.length} sentences first.`;
+      updateProgress();
+      return;
+    }
+
+    const allCorrect = correct === inputs.length;
+    feedback.className = `feedback ${allCorrect ? 'correct' : 'incorrect'}`;
+    feedback.textContent = allCorrect
+      ? `Excellent — ${correct}/${inputs.length} correct.`
+      : `${correct}/${inputs.length} correct. Check the highlighted answers and try again.`;
+
+    if (allCorrect) completed.add(id);
+    else completed.delete(id);
+
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = completed.size;
+    const bar = document.getElementById('bar');
+    const status = document.getElementById('status');
+    const finalScore = document.getElementById('finalScore');
+
+    if (bar) bar.style.width = `${(count / 4) * 100}%`;
+    if (status) status.textContent = `${count} of 4 activities completed`;
+
+    if (finalScore) {
+      finalScore.textContent = count === 4
+        ? 'All four activities completed. Great work — now try rewriting one answer using more sophisticated C1 vocabulary.'
+        : `${count}/4 activities completed. Keep going!`;
+    }
+  }
+
+  function resetAll() {
+    completed.clear();
+
+    document.querySelectorAll('select').forEach(select => {
+      select.value = '';
+      select.style.borderColor = '';
+    });
+
+    document.querySelectorAll('.open-input').forEach(input => {
+      input.value = '';
+      input.style.borderColor = '';
+    });
+
+    document.querySelectorAll('.feedback').forEach(feedback => {
+      feedback.textContent = '';
+      feedback.className = 'feedback';
+    });
+
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.getElementById('check-a1')?.addEventListener('click', () => checkSelect('a1'));
+  document.getElementById('check-a2')?.addEventListener('click', () => checkOpen('a2'));
+  document.getElementById('check-a3')?.addEventListener('click', () => checkSelect('a3'));
+  document.getElementById('check-a4')?.addEventListener('click', () => checkOpen('a4'));
+  document.getElementById('reset-all')?.addEventListener('click', resetAll);
+
+  ['a2', 'a4'].forEach(id => {
+    document.getElementById(id)?.querySelectorAll('.open-input').forEach(input => {
+      input.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          checkOpen(id);
+        }
+      });
+    });
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
